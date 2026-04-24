@@ -1,0 +1,38 @@
+name: Java CI/CD Pipeline
+
+on:
+  schedule:
+    - cron: "* * * * *"   
+
+jobs:
+  build-and-deploy:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: java-github-actions-demo
+
+    steps:
+
+      # Step 1: Checkout Code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Java
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      # Step 3: Build with Maven
+      - name: Build with Maven
+        run: mvn clean package
+
+      # Step 4: Deployment
+      - name: Deploy Step
+        run: |
+          echo "Deploying application..."
+          echo "JAR available in target/"
