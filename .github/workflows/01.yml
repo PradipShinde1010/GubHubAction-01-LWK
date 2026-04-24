@@ -1,0 +1,10 @@
+name: single job docker deploy
+on: push
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: mvn package
+      - run: docker build -t image1:v1 .
+      - run: docker push image1:v1
