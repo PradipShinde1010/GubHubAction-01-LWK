@@ -3,6 +3,11 @@ on: push
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: java-github-actions-demo
+
     steps:
       - uses: actions/checkout@v4
       - run: mvn package
